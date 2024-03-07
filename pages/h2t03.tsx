@@ -3,7 +3,7 @@ import '@/app/globals.css';
 
 const ColorShowerPage: React.FC = () => {
     return (
-        <div className="flex flex-col items-center min-h-screen p-[256px] gap-[64px]">
+        <div className="flex flex-col items-center min-h-screen p-64 gap-16">
             <h1 className="text-4xl">Color Shower</h1>
             <div className="flex justify-between items-center self-stretch">
                 <input type="text" className="flex flex-col justify-center items-start gap-[10px] self-stretch border-[1px] border-[#000] w-[384px]" />
