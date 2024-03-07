@@ -10,7 +10,7 @@ const ColorShowerPage: React.FC = () => {
                 <button className="flex justify-center items-center gap-[10px] bg-[#8eff7b] text-[#000] p-6 rounded-[10px]">Show</button>
             </div>
             <div className="w-24 h-24 bg-[#ffb200]"></div>
-            <div className="flex gap-[48px]">
+            <div className="flex gap-12">
                 <div className="w-16 h-16 bg-[#F00]"></div>
                 <div className="w-16 h-16 bg-[#d9d9d9]"></div>
                 <div className="w-16 h-16 bg-[#00A3FF]"></div>
