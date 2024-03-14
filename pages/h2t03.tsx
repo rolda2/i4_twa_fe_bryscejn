@@ -1,22 +1,18 @@
-import React from 'react';
-import '@/app/globals.css';
+import { FC } from "react";
+import { ColorWidget } from "@/components/ColorWidget";
+import "@/app/globals.css";
 
-const ColorShowerPage: React.FC = () => {
+const ColorShower: FC = () => {
     return (
-        <div className="flex flex-col items-center min-h-screen p-64 gap-16">
-            <h1 className="text-4xl">Color Shower</h1>
-            <div className="flex justify-between items-center self-stretch">
-                <input type="text" className="flex flex-col justify-center items-start gap-[10px] self-stretch border-[1px] border-[#000] w-[384px]" />
-                <button className="flex justify-center items-center gap-[10px] bg-[#8eff7b] text-[#000] p-6 rounded-[10px]">Show</button>
+        <div className="flex flex-col items-center gap-16 p-64">
+            <h1 className="text-4xl">Color shower</h1>
+            <div className="flex flex-row justify-between w-full">
+                <input className="border border-black w-96 h-[4.875rem]" />
+                <button className="p-6 bg-[#8EFF7B] rounded-xl text-2xl">Show</button>
             </div>
-            <div className="w-24 h-24 bg-[#ffb200]"></div>
-            <div className="flex gap-12">
-                <div className="w-16 h-16 bg-[#F00]"></div>
-                <div className="w-16 h-16 bg-[#d9d9d9]"></div>
-                <div className="w-16 h-16 bg-[#00A3FF]"></div>
-            </div>
+            <ColorWidget colorInput="#ffb200" />
         </div>
     );
-};
+}
 
-export default ColorShowerPage;
+export default ColorShower;
