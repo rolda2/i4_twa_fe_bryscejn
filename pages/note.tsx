@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "@/app/globals.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faBook, faGear, faAnglesRight, faAnglesLeft, faFile, faShare } from '@fortawesome/free-solid-svg-icons';
 import { faPrint } from '@fortawesome/free-solid-svg-icons/faPrint';
 
 const Note: React.FC = () => {
+    const [noteData, setNoteData] = useState<null | { title: string; content: any[] }>(null);
     const [isExpanded, setIsExpanded] = useState(true);
     const [selectedFile, setSelectedFile] = useState('I3_HS');
     const [selectedButton, setSelectedButton] = useState('book');
+
+    useEffect(() => {
+        fetch('/api/notes/I3_HS')
+            .then(response => response.json())
+            .then(data => setNoteData(data));
+    }, []);
 
     const handleFileClick = (file: string) => {
         setSelectedFile(file);
@@ -84,22 +91,28 @@ const Note: React.FC = () => {
                     <div className='flex items-start gap-[10px] self-stretch py-3 border-b-[1px] border-[#EDEDF0]'>
                         <p className='text-[40px] font-bold'>{selectedFile}</p>
                     </div>
-                    <div className='flex items-start gap-[10px] self-stretch pt-9 pb-2'>
-                        <p className='text-[30px] font-semibold'>Dynamický routing</p>
-                    </div>
-                    <div className='flex items-start gap-[10px] self-stretch flex-col py-1'>
-                        <p className='text-normal font-normal leading-6'>Dynamický routing nám zajišťuje routovací infrastrukturu, do které již nemusíme zasahovat. Nemusíme psát routovací tabulku, nemusíme myslet na změny v síti. Musíme DRP jen nastavit.</p>
-                    </div>
-                    <div className='flex items-start gap-[10px] self-stretch flex-col py-1'>
-                        <p className='text-normal font-normal leading-6'>Kromě funkcí routingu nám DRP poskytují:</p>
-                    </div>
-                    <div className='flex items-start gap-[10px] self-stretch flex-col'>
-                        <ul className='list-disc list-inside leading-6'>
-                            <li>Škálovatelnost</li>
-                            <li>Rychlou konvergenci</li>
-                            <li>Dostupnost</li>
-                        </ul>
-                    </div>
+                    {noteData && (
+                            <>
+                                <div className='flex items-start gap-[10px] self-stretch pt-9 pb-2'>
+                                    <p className='text-[30px] font-semibold'>{noteData.title}</p>
+                                </div>
+                                {noteData.content.map((item, index) => (
+                                    typeof item === 'string' ? (
+                                        <div key={index} className='flex items-start gap-[10px] self-stretch flex-col py-1'>
+                                            <p className='text-normal font-normal leading-6'>{item}</p>
+                                        </div>
+                                    ) : (
+                                        <div key={index} className='flex items-start gap-[10px] self-stretch flex-col'>
+                                            <ul className='list-disc list-inside leading-6'>
+                                            {item.items.map((listItem: string, listItemIndex: number) => (
+                                                    <li key={listItemIndex}>{listItem}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )
+                                ))}
+                            </>
+                        )}
                     <div className='flex items-start gap-[10px] self-stretch flex-col pt-9 pb-2'>
                         <p className='text-[30px] font-semibold'>Charakteristika DRP</p>
                     </div>
