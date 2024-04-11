@@ -3,8 +3,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 interface Note {
-    title: string;
-    content: (string | { type: string; items: string[]; })[];
+    title: string[];
+    content1: (string | { type: string; items: string[]; })[];
+    content2: (string | { type: string; items: string[]; })[];
 }
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
@@ -12,15 +13,22 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
 
     const notes: Record<string, Note> = {
         'I3_HS': {
-            title: 'Dynamický routing',
-            content: [
+            title: ['Dynamický routing', 'Charakteristika DRP'],
+            content1: [
                 'Dynamický routing nám zajišťuje routovací infrastrukturu, do které již nemusíme zasahovat. Nemusíme psát routovací tabulku, nemusíme myslet na změny v síti. Musíme DRP jen nastavit.',
                 'Kromě funkcí routingu nám DRP poskytují:',
                 {
                     type: 'list',
                     items: ['Škálovatelnost', 'Rychlou konvergenci', 'Dostupnost']
                 }
-            ]
+            ],
+            content2: [
+                'O každém dynamickém routovacím protokolu můžeme říct, že má minimálně:',
+                {
+                    type: 'list',
+                    items: ['Algoritmus', 'Metriku', 'Zprávy daného protokolu']
+                }
+            ],
         },
         // Add more notes here
     };
